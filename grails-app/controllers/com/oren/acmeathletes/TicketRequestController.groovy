@@ -1,6 +1,6 @@
 package com.oren.acmeathletes
 
-class TicketsController {
+class TicketRequestController {
+
     def scaffold = true
-    
 }

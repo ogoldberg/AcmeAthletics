@@ -2,7 +2,7 @@ package com.oren.acmeathletes
 
 import grails.test.*
 
-class TicketsControllerTests extends ControllerUnitTestCase {
+class TicketRequestControllerTests extends ControllerUnitTestCase {
     protected void setUp() {
         super.setUp()
     }
