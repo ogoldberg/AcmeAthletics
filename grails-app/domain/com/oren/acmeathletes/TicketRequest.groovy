@@ -26,5 +26,6 @@ class TicketRequest {
 
 
     static constraints = {
+        creditCardNumber(creditCard:true)
     }
 }
