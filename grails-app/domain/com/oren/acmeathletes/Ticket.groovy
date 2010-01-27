@@ -1,4 +1,4 @@
-package com.oren.AcmeAthletics
+package com.oren.acmeathletes
 
 class Ticket {
 
