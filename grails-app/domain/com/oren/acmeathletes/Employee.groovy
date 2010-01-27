@@ -5,6 +5,7 @@ class Employee {
     String firstName
     String lastName
     Department department
+    String status
 
 
     static constraints = {
