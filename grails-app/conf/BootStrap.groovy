@@ -4,7 +4,7 @@ class BootStrap {
 
 
     def init = { servletContext ->
-        def user = new ShiroUser(username: "user123", passwordHash: new Sha1Hash("password").toHex())
+        def user = new ShiroUser(username: "admin", passwordHash: new Sha1Hash("admin").toHex())
         user.addToPermissions("*:*")
         user.save()
 
