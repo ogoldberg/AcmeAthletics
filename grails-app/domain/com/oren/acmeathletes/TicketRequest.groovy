@@ -1,7 +1,7 @@
 package com.oren.acmeathletes
 
 class TicketRequest {
-    Date gameDate
+    Game gameDate
     Integer numTickets
     String sectionRequested
     String actualSeats
@@ -11,7 +11,7 @@ class TicketRequest {
     Boolean willCall
     String recipient
     String creditCardType
-    Integer creditCardNumber
+    Number creditCardNumber
     Date creditCardExpiration
     Integer creditCardCode
     Employee employee
@@ -20,7 +20,6 @@ class TicketRequest {
     Date requestDate
     Boolean approved
     String reason
-
 
 
 
