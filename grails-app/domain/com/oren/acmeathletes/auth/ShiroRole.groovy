@@ -1,3 +1,5 @@
+package com.oren.acmeathletes.auth
+
 class ShiroRole {
     String name
 

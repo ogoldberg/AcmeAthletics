@@ -1,3 +1,5 @@
+package com.oren.acmeathletes.auth
+
 class ShiroUser {
     String username
     String passwordHash

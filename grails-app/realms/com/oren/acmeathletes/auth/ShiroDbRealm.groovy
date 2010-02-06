@@ -1,3 +1,6 @@
+package com.oren.acmeathletes.auth
+
+
 import org.apache.shiro.authc.AccountException
 import org.apache.shiro.authc.IncorrectCredentialsException
 import org.apache.shiro.authc.UnknownAccountException
