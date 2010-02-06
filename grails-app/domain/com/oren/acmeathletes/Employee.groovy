@@ -6,6 +6,7 @@ class Employee {
     String lastName
     Department department
     String status
+    String title
     String email
 
 
