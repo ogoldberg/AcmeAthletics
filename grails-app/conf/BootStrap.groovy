@@ -1,5 +1,5 @@
 import org.apache.shiro.crypto.hash.Sha1Hash
-
+import com.oren.acmeathletes.*
 import com.oren.acmeathletes.auth.ShiroUser;
 import com.oren.acmeathletes.auth.ShiroRole;
 
@@ -15,8 +15,8 @@ class BootStrap {
             }
 
         development {
-            def d1 = new com.oren.acmeathletes.Department (
-                name: "Baseball Operations" )
+            def d1 = new Department (
+                name: "Baseball Operations" ).save()
 
             def adminRole = new ShiroRole(name: "Administrator").save()
 
