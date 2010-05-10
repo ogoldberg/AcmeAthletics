@@ -7,13 +7,20 @@ class BootStrap {
 
 
     def init = { servletContext ->
-        def user = new ShiroUser(username: "admin", passwordHash: new Sha1Hash("admin").toHex())
-        user.addToPermissions("*:*")
-        user.save()
-        if (!user.save()) {
-
-        }
-
+         if (ShiroUser.count() == 0) {
+           def user = new ShiroUser(username: "admin", passwordHash: new Sha1Hash("admin").toHex())
+            user.addToPermissions("*:*")
+            user.save()
+            createRoles()
+            user.addToRoles(ShiroRole.findByName("Administrator"))
+            user.save()
+            if (user.roles.find { it.name == 'Administrator' }) {
+                println "He has Administrator role"
+            }
+            else {
+                println "He doesn't have Administrator role"
+            }
+         }
         development {
             //Departments
             def d1 = new Department (
@@ -360,20 +367,7 @@ class BootStrap {
              createDummyGame (
                  "9/19/2010 13:15:00 CDT",
                  "SD")  
-
-
-
-            def adminRole = new ShiroRole(name: "Administrator").save()
-
-            def ticketBuyerRole = new ShiroRole(name: "TicketBuyer").save()
-            def vpRole = new ShiroRole(name: "VicePresident").save()
-
         }
-
-        
-
-
-
 
     }
     def destroy = {
@@ -406,8 +400,12 @@ class BootStrap {
         else {game.save()}
         return game
     }
+        def createRoles() {
+            def adminRole = new ShiroRole(name: "Administrator").save()
+
+            def ticketBuyerRole = new ShiroRole(name: "TicketBuyer").save()
+            def vpRole = new ShiroRole(name: "VicePresident").save()
+        }
+
 
 }
-
-
-
