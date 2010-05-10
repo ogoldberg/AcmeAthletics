@@ -33,6 +33,8 @@ class TicketRequest {
     static constraints = {
         requestType(inList:["Paid", "Comp"])
         status(inList:["Pending", "Approved", "Declined", "Canceled at employee's request"])
+        vpApprovalDate()
+        reasonForDecline()
         employee()
         department()
         requestDate()
@@ -46,8 +48,6 @@ class TicketRequest {
         recipient()
         category(inList:["Employee", "VIP", "Business Client", "Prospective Client", "Charitable", "Other"])
         businessPurpose()
-        vpApprovalDate()
-        reasonForDecline()
         amountDue()
         totalAmountDue()
         creditCardType(inList:["Visa", "MasterCard", "Discover", "AmEx"])
