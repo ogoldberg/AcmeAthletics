@@ -7,6 +7,10 @@ class Location {
     Boolean seatsAvailable = true
     Boolean allInclusive = false
 
+    String toString(){
+        this.name
+    }
+    
     static constraints = {
        
     }
