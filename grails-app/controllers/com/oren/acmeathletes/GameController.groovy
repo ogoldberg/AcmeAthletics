@@ -8,9 +8,21 @@ class GameController {
         redirect(action: "list", params: params)
     }
 
+    def archive = {
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        def gameInstanceList = 
+            Game.findAllByGameDateLessThanEquals(new Date() + 1,
+            [max:params.max, offset:params.offset])
+        [gameInstanceList: gameInstanceList,
+            gameInstanceTotal: Game.count()]
+    }
+    
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [gameInstanceList: Game.findAllByGameDateGreaterThanEquals(new Date() - 1),
+        def gameInstanceList = 
+            Game.findAllByGameDateGreaterThanEquals(new Date() + 1,
+            [max:params.max, offset:params.offset])
+        [gameInstanceList: gameInstanceList,
             gameInstanceTotal: Game.count()]
     }
 
