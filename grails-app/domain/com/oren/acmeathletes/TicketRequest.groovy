@@ -2,15 +2,14 @@ package com.oren.acmeathletes
 
 class TicketRequest {
     String requestType
-    Game gameDate
+    Game game
     Integer numberOfTicketsRequested
     Location locationPref
     Location actualSeats
     Double amountDue
     Double totalAmountDue
     String ifRequestedLocationNotAvailable
-    Boolean willCall = true
-    Boolean returnTicketToEmployee = false
+    String ticketDelivery
     String recipient
     String category
     String creditCardType
@@ -32,20 +31,19 @@ class TicketRequest {
 
     static constraints = {
         requestType(inList:["Paid", "Comp"])
-        status(inList:["Pending", "Approved", "Declined", "Canceled at employee's request"])
-        vpApprovalDate()
+        status(inList:["Waiting for Approval", "Approval Declined", "Waiting for Purchase", "Purchase Declined", "Purchased", "Canceled at employee's request"])        
         reasonForDecline()
         employee()
         department()
         requestDate()
-        gameDate()
+        game()
         numberOfTicketsRequested()
         locationPref()
         ifRequestedLocationNotAvailable(inList:["Fill with best available", "Cancel Order"])
         actualSeats()
-        willCall()
-        returnTicketToEmployee()
+        ticketDelivery(inList:["Will Call", "Return Ticket to Employee"])
         recipient()
+        vpApprovalDate()
         category(inList:["Employee", "VIP", "Business Client", "Prospective Client", "Charitable", "Other"])
         businessPurpose()
         amountDue()
