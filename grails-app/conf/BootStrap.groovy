@@ -7,8 +7,100 @@ class BootStrap {
 
 
     def init = { servletContext ->
+
          if (ShiroUser.count() == 0) {
-           def user = new ShiroUser(username: "admin", passwordHash: new Sha1Hash("admin").toHex())
+             createDepartments()
+             createVp()
+             createRoles()
+             createUsers()
+             createLocations()
+             createGames()
+         }
+    }
+    def destroy = {
+
+    }
+    def createDummyGame(dateString, opponent) {
+        def date = new Date(dateString)
+        def isPremium = false
+        if (date.format("EEE")== "Fri" ||
+            date.format("EEE") == "Sat" ||
+            date.format("EEE") == "Sun"
+        )
+        {
+            isPremium = true
+        }
+
+
+        def game = new Game(
+            homeGame:true,
+            ticketsAvailable: true,
+            gameDate: dateString,
+            opponent: opponent,
+            openingDay: false,
+            premiumDate: isPremium
+
+        )
+        if (!game.validate()) {
+            println "Game didn't validate!"
+            println game.errors.allErrors
+        }
+        else {game.save()}
+        return game
+    }
+        def createRoles() {
+            def adminRole = new ShiroRole(name: "Administrator").save()
+            def employeeRole = new ShiroRole(name: "Employee").save()
+            def ticketBuyerRole = new ShiroRole(name: "TicketBuyer").save()
+            def vicePresidentRole = new ShiroRole(name: "VicePresident").save()
+        }
+
+        def createUsers() {
+            def employee = new Employee(username: "employee", 
+            passwordHash: new Sha1Hash("employee").toHex(),
+            firstName: "Eddie",
+            lastName: "Van Halen",
+            accountNumber: "123456",
+            department: Department.findByName("Baseball Operations"),
+            email: "soandso@somesite.com",
+            title: "little guy",
+            status: "Full time")
+            employee.addToPermissions("*:*")
+            if (!employee.validate()) {
+                println "Employee didn't validate!"
+                println employee.errors.allErrors
+            }
+            employee.save()
+            employee.addToRoles(ShiroRole.findByName("Employee"))
+            employee.save()
+            if (employee.roles.find { it.name == 'Employee' }) {
+                println "He has employee role"
+            }
+            else {
+                println "He doesn't have employee role"
+            } 
+
+              def ticketBuyer = new Employee(username: "ticketBuyer", passwordHash: new Sha1Hash("ticketBuyer").toHex())
+            ticketBuyer.addToPermissions("*:*")
+            ticketBuyer.save()
+            createRoles()
+            ticketBuyer.addToRoles(ShiroRole.findByName("TicketBuyer"))
+            ticketBuyer.save()
+            if (ticketBuyer.roles.find { it.name == 'TicketBuyer' }) {
+                println "He has ticketBuyer role"
+            }
+            else {
+                println "He doesn't have ticketBuyer role"
+            } 
+
+           
+         
+           // def vicePresident = new ShiroUser(username: "vicePresident", passwordHash: new Sha1Hash("vicePresident").toHex())
+            // vicePresident.addToPermissions("*:*")
+            // createRoles()
+          // vicePresident.addToRoles(vicePresidentRole)  
+          // vicePresident.save()
+           def user = new Employee(username: "admin", passwordHash: new Sha1Hash("admin").toHex())
             user.addToPermissions("*:*")
             user.save()
             createRoles()
@@ -20,43 +112,51 @@ class BootStrap {
             else {
                 println "He doesn't have Administrator role"
             }
-         }
-        development {
-            //Departments
+        }
+           def createDepartments() {
+          //Departments
             def d1 = new Department (
                 name: "Baseball Operations",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
-
+                phone: "555-555-5555").save()
             def d2 = new Department (
                 name: "Business Development",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
             def d3 = new Department (
                 name: "Finance",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
             def d4 = new Department (
                 name: "Stadium Operations",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
             def d5 = new Department (
                 name: "Corporate Sales",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
             def d6 = new Department (
                 name: "Group Sales",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
             def d7 = new Department (
                 name: "Ticketing",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
             def d8 = new Department (
                 name: "President/Owners",
-                phone: "555-555-5555",
-                vp: "Bob Jones").save()
+                phone: "555-555-5555").save()
 
+}
+    def createVp() {
+        def vicePresident = new Employee(username: "vicePresident", passwordHash: new Sha1Hash("vicePresident").toHex())
+        vicePresident.addToPermissions("*:*")
+        vicePresident.save()
+        createRoles()
+        vicePresident.addToRoles(ShiroRole.findByName("VicePresident"))
+        vicePresident.save()
+        if (vicePresident.roles.find { it.name == 'VicePresident' }) {
+            println "He has vicePresident role"
+        }
+        else {
+            println "He doesn't have vicePresident role"
+        } 
+
+    }
+def createLocations() {                  
             //Locations
             def l1 = new Location (
                 name: "Outfield Terrace Reserved",
@@ -68,7 +168,7 @@ class BootStrap {
                 premiumPrice: 21 ).save()
             def l3 = new Location (
                 name: "Pavillion Reserved",
-                regularPrice: 20,
+               regularPrice: 20,
                 premiumPrice: 25 ).save()
             def l4 = new Location (
                 name: "Bleachers",
@@ -169,7 +269,8 @@ class BootStrap {
                 name: "Cardinals Club",
                 regularPrice: 250,
                 premiumPrice: 250 ).save()
-
+             }
+def createGames() {             
             //Games
 
             createDummyGame (
@@ -368,44 +469,4 @@ class BootStrap {
                  "9/19/2010 13:15:00 CDT",
                  "SD")  
         }
-
-    }
-    def destroy = {
-    }
-    def createDummyGame(dateString, opponent) {
-        def date = new Date(dateString)
-        def isPremium = false
-        if (date.format("EEE")== "Fri" ||
-            date.format("EEE") == "Sat" ||
-            date.format("EEE") == "Sun"
-        )
-        {
-            isPremium = true
-        }
-
-
-        def game = new Game(
-            homeGame:true,
-            ticketsAvailable: true,
-            gameDate: dateString,
-            opponent: opponent,
-            openingDay: false,
-            premiumDate: isPremium
-
-        )
-        if (!game.validate()) {
-            println "Game didn't validate!"
-            println game.errors.allErrors
-        }
-        else {game.save()}
-        return game
-    }
-        def createRoles() {
-            def adminRole = new ShiroRole(name: "Administrator").save()
-
-            def ticketBuyerRole = new ShiroRole(name: "TicketBuyer").save()
-            def vpRole = new ShiroRole(name: "VicePresident").save()
-        }
-
-
 }
