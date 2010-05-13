@@ -25,7 +25,6 @@
           <td><g:checkBox name="rememberMe" value="${rememberMe}" /></td>
         </tr>
         <tr>
-          <td />
           <td><input type="submit" value="Sign in" /></td>
         </tr>
       </tbody>
