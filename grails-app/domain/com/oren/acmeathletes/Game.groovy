@@ -21,7 +21,7 @@ class Game {
 
 
     String toString() {
-       this.gameDate
+     this.opponent  + " " + this.gameDate
     }    
 
     static mapping = {
