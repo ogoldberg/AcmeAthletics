@@ -1,6 +1,8 @@
 package com.oren.acmeathletes
 
-class Employee {
+import com.oren.acmeathletes.auth.*
+
+class Employee extends ShiroUser{
 
     String firstName
     String lastName
@@ -9,6 +11,10 @@ class Employee {
     String title
     String email
     Integer accountNumber
+    
+    String toString() {
+        this.firstName + " " + this.lastName + ", " + accountNumber
+    }
 
     static constraints = {
         firstName(blank:false)
