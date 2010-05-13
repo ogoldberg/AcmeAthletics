@@ -44,13 +44,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="ticketRequest.vpApprovalDate.label" default="Vp Approval Date" /></td>
-                            
-                            <td valign="top" class="value"><g:formatDate date="${ticketRequestInstance?.vpApprovalDate}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="ticketRequest.reasonForDecline.label" default="Reason For Decline" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: ticketRequestInstance, field: "reasonForDecline")}</td>
@@ -114,16 +107,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="ticketRequest.willCall.label" default="Will Call" /></td>
+                            <td valign="top" class="name"><g:message code="ticketRequest.ticketDelivery.label" default="Ticket Delivery" /></td>
                             
-                            <td valign="top" class="value"><g:formatBoolean boolean="${ticketRequestInstance?.willCall}" /></td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="ticketRequest.returnTicketToEmployee.label" default="Return Ticket To Employee" /></td>
-                            
-                            <td valign="top" class="value"><g:formatBoolean boolean="${ticketRequestInstance?.returnTicketToEmployee}" /></td>
+                            <td valign="top" class="value">${fieldValue(bean: ticketRequestInstance, field: "ticketDelivery")}</td>
                             
                         </tr>
                     
@@ -131,6 +117,13 @@
                             <td valign="top" class="name"><g:message code="ticketRequest.recipient.label" default="Recipient" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: ticketRequestInstance, field: "recipient")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="ticketRequest.vpApprovalDate.label" default="Vp Approval Date" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${ticketRequestInstance?.vpApprovalDate}" /></td>
                             
                         </tr>
                     

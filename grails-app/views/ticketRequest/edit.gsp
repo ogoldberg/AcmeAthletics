@@ -50,15 +50,6 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="vpApprovalDate"><g:message code="ticketRequest.vpApprovalDate.label" default="Vp Approval Date" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'vpApprovalDate', 'errors')}">
-                                    <g:datePicker name="vpApprovalDate" precision="day" value="${ticketRequestInstance?.vpApprovalDate}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="reasonForDecline"><g:message code="ticketRequest.reasonForDecline.label" default="Reason For Decline" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'reasonForDecline', 'errors')}">
@@ -140,19 +131,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="willCall"><g:message code="ticketRequest.willCall.label" default="Will Call" /></label>
+                                  <label for="ticketDelivery"><g:message code="ticketRequest.ticketDelivery.label" default="Ticket Delivery" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'willCall', 'errors')}">
-                                    <g:checkBox name="willCall" value="${ticketRequestInstance?.willCall}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="returnTicketToEmployee"><g:message code="ticketRequest.returnTicketToEmployee.label" default="Return Ticket To Employee" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'returnTicketToEmployee', 'errors')}">
-                                    <g:checkBox name="returnTicketToEmployee" value="${ticketRequestInstance?.returnTicketToEmployee}" />
+                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'ticketDelivery', 'errors')}">
+                                    <g:select name="ticketDelivery" from="${ticketRequestInstance.constraints.ticketDelivery.inList}" value="${ticketRequestInstance?.ticketDelivery}" valueMessagePrefix="ticketRequest.ticketDelivery"  />
                                 </td>
                             </tr>
                         
@@ -162,6 +144,15 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'recipient', 'errors')}">
                                     <g:textField name="recipient" value="${ticketRequestInstance?.recipient}" />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="vpApprovalDate"><g:message code="ticketRequest.vpApprovalDate.label" default="Vp Approval Date" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'vpApprovalDate', 'errors')}">
+                                    <g:datePicker name="vpApprovalDate" precision="day" value="${ticketRequestInstance?.vpApprovalDate}"  />
                                 </td>
                             </tr>
                         

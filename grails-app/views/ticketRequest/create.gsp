@@ -6,12 +6,20 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'ticketRequest.label', default: 'TicketRequest')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
-        <g:javascript src="jquery-1.4.2.min.js" />
-        <script>
-        </script>
+<script type="text/javascript">
+$(document).ready(function(){
+$('#paid').hide();
+$('#comp').hide();
+$("#requestType").change(function(){
+    if(this.value == 'all')
+$("#" + this.value).show().siblings().hide();
+});
+
+$("#requestType").change();
+});
+</script>
     </head>
     <body>
-
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
@@ -33,7 +41,7 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="requestType"><g:message code="ticketRequest.requestType.label" default="Request Type" /></label>
+                                    <label id="requestType" for="requestType"><g:message code="ticketRequest.requestType.label" default="Request Type" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'requestType', 'errors')}">
                                     <g:select name="requestType" from="${ticketRequestInstance.constraints.requestType.inList}" value="${ticketRequestInstance?.requestType}" valueMessagePrefix="ticketRequest.requestType"  />
@@ -46,15 +54,6 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'status', 'errors')}">
                                     <g:select name="status" from="${ticketRequestInstance.constraints.status.inList}" value="${ticketRequestInstance?.status}" valueMessagePrefix="ticketRequest.status"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="vpApprovalDate"><g:message code="ticketRequest.vpApprovalDate.label" default="Vp Approval Date" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'vpApprovalDate', 'errors')}">
-                                    <g:datePicker name="vpApprovalDate" precision="day" value="${ticketRequestInstance?.vpApprovalDate}"  />
                                 </td>
                             </tr>
                         
@@ -96,10 +95,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="gameDate"><g:message code="ticketRequest.gameDate.label" default="Game Date" /></label>
+                                    <label for="game"><g:message code="ticketRequest.game.label" default="Game" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'gameDate', 'errors')}">
-                                    <g:select name="gameDate.id" from="${com.oren.acmeathletes.Game.list()}" optionKey="id" value="${ticketRequestInstance?.gameDate?.id}"  />
+                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'game', 'errors')}">
+                                    <g:select name="game.id" from="${com.oren.acmeathletes.Game.list()}" optionKey="id" value="${ticketRequestInstance?.game?.id}"  />
                                 </td>
                             </tr>
                         
@@ -141,19 +140,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="willCall"><g:message code="ticketRequest.willCall.label" default="Will Call" /></label>
+                                    <label for="ticketDelivery"><g:message code="ticketRequest.ticketDelivery.label" default="Ticket Delivery" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'willCall', 'errors')}">
-                                    <g:checkBox name="willCall" value="${ticketRequestInstance?.willCall}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="returnTicketToEmployee"><g:message code="ticketRequest.returnTicketToEmployee.label" default="Return Ticket To Employee" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'returnTicketToEmployee', 'errors')}">
-                                    <g:checkBox name="returnTicketToEmployee" value="${ticketRequestInstance?.returnTicketToEmployee}" />
+                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'ticketDelivery', 'errors')}">
+                                    <g:select name="ticketDelivery" from="${ticketRequestInstance.constraints.ticketDelivery.inList}" value="${ticketRequestInstance?.ticketDelivery}" valueMessagePrefix="ticketRequest.ticketDelivery"  />
                                 </td>
                             </tr>
                         
@@ -163,6 +153,19 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'recipient', 'errors')}">
                                     <g:textField name="recipient" value="${ticketRequestInstance?.recipient}" />
+                                </td>
+                            </tr>
+                        </tbody>
+                        <table>
+                            <tbody>
+                                <div id="comp">
+                                    <tr><h3>If Comp:</h3></tr>
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="vpApprovalDate"><g:message code="ticketRequest.vpApprovalDate.label" default="Vp Approval Date" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: ticketRequestInstance, field: 'vpApprovalDate', 'errors')}">
+                                    <g:datePicker name="vpApprovalDate" precision="day" value="${ticketRequestInstance?.vpApprovalDate}"  />
                                 </td>
                             </tr>
                         
@@ -183,7 +186,14 @@
                                     <g:textField name="businessPurpose" value="${ticketRequestInstance?.businessPurpose}" />
                                 </td>
                             </tr>
-                        
+                            </div>
+                        </tbody>
+                    </table>
+                    
+                    <table>
+                        <tbody>
+                            <div id="paid">
+                                <tr><h3>If Paid:</h3></tr>
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="amountDue"><g:message code="ticketRequest.amountDue.label" default="Amount Due" /></label>
@@ -237,7 +247,7 @@
                                     <g:textField name="creditCardCode" value="${fieldValue(bean: ticketRequestInstance, field: 'creditCardCode')}" />
                                 </td>
                             </tr>
-                        
+                        </div>
                         </tbody>
                     </table>
                 </div>

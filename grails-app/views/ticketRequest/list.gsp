@@ -28,11 +28,11 @@
                         
                             <g:sortableColumn property="status" title="${message(code: 'ticketRequest.status.label', default: 'Status')}" />
                         
-                            <g:sortableColumn property="vpApprovalDate" title="${message(code: 'ticketRequest.vpApprovalDate.label', default: 'Vp Approval Date')}" />
-                        
                             <g:sortableColumn property="reasonForDecline" title="${message(code: 'ticketRequest.reasonForDecline.label', default: 'Reason For Decline')}" />
                         
                             <th><g:message code="ticketRequest.employee.label" default="Employee" /></th>
+                   	    
+                            <th><g:message code="ticketRequest.department.label" default="Department" /></th>
                    	    
                         </tr>
                     </thead>
@@ -46,11 +46,11 @@
                         
                             <td>${fieldValue(bean: ticketRequestInstance, field: "status")}</td>
                         
-                            <td><g:formatDate date="${ticketRequestInstance.vpApprovalDate}" /></td>
-                        
                             <td>${fieldValue(bean: ticketRequestInstance, field: "reasonForDecline")}</td>
                         
                             <td>${fieldValue(bean: ticketRequestInstance, field: "employee")}</td>
+                        
+                            <td>${fieldValue(bean: ticketRequestInstance, field: "department")}</td>
                         
                         </tr>
                     </g:each>
