@@ -6,6 +6,7 @@
         <g:layoutHead />
         <g:javascript library="application" />
         <nav:resources/>
+        <g:javascript library="jquery"/>
     </head>
     <body>
         <div id="spinner" class="spinner" style="display:none;">
