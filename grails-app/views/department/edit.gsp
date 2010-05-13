@@ -50,15 +50,6 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="vp"><g:message code="department.vp.label" default="Vp" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: departmentInstance, field: 'vp', 'errors')}">
-                                    <g:textField name="vp" value="${departmentInstance?.vp}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="employees"><g:message code="department.employees.label" default="Employees" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: departmentInstance, field: 'employees', 'errors')}">

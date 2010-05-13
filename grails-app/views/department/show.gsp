@@ -44,13 +44,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="department.vp.label" default="Vp" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: departmentInstance, field: "vp")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="department.employees.label" default="Employees" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
